@@ -3,7 +3,7 @@ version: '3'
 services:
   interpreter:
     container_name: interpreter
-    image: promptengineers/interpreter:latest
+    # image: promptengineers/interpreter:latest
     build: .
     restart: always
     ports:
@@ -11,7 +11,9 @@ services:
       - "8001:8000"
     environment:
       - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
       - PYTHONPATH=/home/jovyan
-    entrypoint: ["sh", "-c", "start-notebook.sh --NotebookApp.token='' & uvicorn api:app --host 0.0.0.0 --port 8000"]
+    entrypoint: ["sh", "-c", "start-notebook.sh --NotebookApp.token=${JUPYTER_TOKEN} & uvicorn api:app --host 0.0.0.0 --port 8000"]
     volumes:
       - ./uploads:/tmp
+      - ./notebooks:/home/jovyan/.ipynb_checkpoints

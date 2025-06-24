@@ -3,3 +3,5 @@ downloads
 toolkilt/.venv/
 toolkilt/__pycache__/
 toolkilt/tools/__pycache__/
+**/notebooks/
+**/.env*

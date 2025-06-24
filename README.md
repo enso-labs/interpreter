@@ -179,3 +179,15 @@ curl -X POST http://localhost:8001/terminate -H "Content-Type: application/json"
 ## Result
 # {"status":"success","message":"Session your_session_id terminated successfully."}
 ```
+
+
+```bash
+docker run -d \
+  --name jupyter \
+  --restart always \
+  --env-file .env.jupyter \
+  -p 8888:8888 \
+  -v "$PWD/notebooks:/home/jovyan/work" \
+  -v jupyter_data:/home/jovyan/.jupyter \
+  jupyter/base-notebook:latest
+```
