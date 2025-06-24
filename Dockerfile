@@ -2,6 +2,7 @@
 FROM jupyter/base-notebook:latest
 
 # Copy the API script to the root directory
+COPY mcp_wrap /home/jovyan/mcp_wrap
 COPY src /home/jovyan/src
 COPY api.py /home/jovyan/api.py
 COPY requirements.txt /home/jovyan/requirements.txt
