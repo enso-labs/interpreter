@@ -1,7 +1,7 @@
 services:
   interpreter:
     container_name: interpreter
-    # image: promptengineers/interpreter:latest
+    # image: ghcr.io/enso-labs/interpreter:latest
     build: .
     restart: always
     ports:
