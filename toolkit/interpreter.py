@@ -1,3 +1,4 @@
+import os
 from typing import List
 from pydantic import Field
 
@@ -9,7 +10,7 @@ from tools import Interpreter
 class InterpreterToolkit(BaseToolkit):
 	"""Toolkit for the interpreter."""
 
-	api_url: str = Field(default="http://localhost:8001")
+	api_url: str = Field(default=os.getenv("INTERPRETER_URL", "http://localhost:8100"))
 
 	class Config:
 		"""Pydantic config."""
@@ -21,7 +22,7 @@ class InterpreterToolkit(BaseToolkit):
 		return toolkit
   
 if __name__ == "__main__":
-	toolkit = InterpreterToolkit(api_url="http://localhost:8001")
+	toolkit = InterpreterToolkit(api_url=os.getenv("INTERPRETER_URL", "http://localhost:8100"))
 	tools = toolkit.get_tools()
 	result = tools[0].run({"session_id": "test", "code": "print('Hello, World!')"})
 	print(">>> Tools: ", tools)

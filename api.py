@@ -6,7 +6,7 @@ import os
 import shutil
 from typing import List, Dict
 
-app = FastAPI()
+app = FastAPI(name="Enso Labs Interpreter", docs_url="/")
 
 class CodeExecutionRequest(BaseModel):
     session_id: str

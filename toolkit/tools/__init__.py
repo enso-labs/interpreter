@@ -258,5 +258,5 @@ class Interpreter:
 ## Test
 ########################################################
 if __name__ == "__main__":
-    result = Interpreter(api_url="http://localhost:8001").execute(session_id="test", code="print('Hello, World!')")
+    result = Interpreter().execute(session_id="test", code="print('Hello, World!')")
     print(result)
