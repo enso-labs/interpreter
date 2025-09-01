@@ -12,4 +12,4 @@ COPY README.md /home/jovyan/README.md
 EXPOSE 8888
 
 # Expose an additional port for the FastAPI server
-EXPOSE 8000
+EXPOSE 8100

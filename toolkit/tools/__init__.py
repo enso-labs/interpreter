@@ -1,3 +1,4 @@
+import os
 import httpx
 import logging
 from typing import List
@@ -33,7 +34,7 @@ class DownloadSchema(BaseModel):
 ## Class
 ########################################################
 class Interpreter:
-    def __init__(self, api_url: str = "http://localhost:8000"):
+    def __init__(self, api_url: str = os.getenv("INTERPRETER_URL", "http://localhost:8100")):
         self.api_url = api_url
         
     def install(self, session_id: str, packages: List[str]):
