@@ -1,11 +1,15 @@
 # Use the official Jupyter Notebook image
 FROM jupyter/base-notebook:latest
 
-# Install FastAPI and Uvicorn
-RUN pip install fastapi uvicorn python-multipart
-
 # Copy the API script to the root directory
+COPY src /home/jovyan/src
 COPY api.py /home/jovyan/api.py
+COPY requirements.txt /home/jovyan/requirements.txt
+
+# Install FastAPI and Uvicorn
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir uv && \
+    uv pip install --system --no-cache-dir -r requirements.txt
 
 # Expose port 8888 for the Jupyter Notebook
 EXPOSE 8888
