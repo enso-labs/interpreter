@@ -1,8 +1,9 @@
 import httpx
 import logging
 from typing import List
+from pydantic import BaseModel, Field
+
 from langchain.tools import StructuredTool
-from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import ToolException
 
 ########################################################
@@ -256,8 +257,5 @@ class Interpreter:
 ## Test
 ########################################################
 if __name__ == "__main__":
-    result = Interpreter(api_url="http://localhost:8001").execute().run({
-        "session_id": "test",
-        "code": "print('Hello, World!')"
-    })
+    result = Interpreter(api_url="http://localhost:8001").execute(session_id="test", code="print('Hello, World!')")
     print(result)
