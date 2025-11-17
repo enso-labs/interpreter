@@ -1,8 +1,10 @@
+import os
 import httpx
 import logging
 from typing import List
+from pydantic import BaseModel, Field
+
 from langchain.tools import StructuredTool
-from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import ToolException
 
 ########################################################
@@ -32,7 +34,7 @@ class DownloadSchema(BaseModel):
 ## Class
 ########################################################
 class Interpreter:
-    def __init__(self, api_url: str = "http://localhost:8000"):
+    def __init__(self, api_url: str = os.getenv("INTERPRETER_URL", "http://localhost:8100")):
         self.api_url = api_url
         
     def install(self, session_id: str, packages: List[str]):
@@ -256,8 +258,5 @@ class Interpreter:
 ## Test
 ########################################################
 if __name__ == "__main__":
-    result = Interpreter(api_url="http://localhost:8001").execute().run({
-        "session_id": "test",
-        "code": "print('Hello, World!')"
-    })
+    result = Interpreter().execute(session_id="test", code="print('Hello, World!')")
     print(result)

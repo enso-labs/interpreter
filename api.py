@@ -6,7 +6,7 @@ import os
 import shutil
 from typing import List, Dict
 
-app = FastAPI()
+app = FastAPI(name="Enso Labs Interpreter", docs_url="/")
 
 class CodeExecutionRequest(BaseModel):
     session_id: str
@@ -141,4 +141,4 @@ def download_file(session_id: str, filename: str):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host=os.getenv("HOST", "0.0.0.0"), port=int(os.getenv("PORT", 8100)))
